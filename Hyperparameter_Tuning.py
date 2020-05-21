@@ -69,7 +69,7 @@ def build_model(hp):
     model1 = MaxPooling2D(pool_size=(2, 2))(model1)
     model1 = Dropout(0.25)(model1)
 
-    for idx in range(1, num_layers):
+    for idx in range(1, num_layers-1):
         idx = str(idx)
         filters = hp.Int('filters_' + idx, 32, 256, step=32, default=64)
 
@@ -78,7 +78,7 @@ def build_model(hp):
         model1 = MaxPooling2D(pool_size=(2, 2))(model1)
         model1 = Dropout(0.25)(model1)
 
-    filters = hp.Int('filters_' + str(num_layers), 32, 256, step=32, default=64)
+    filters = hp.Int('filters_' + str(num_layers-1), 32, 256, step=32, default=64)
 
     model1 = Conv2D(filters, (3, 3), padding='same')(model1)
     model1 = Activation(leaky_relu)(model1)
